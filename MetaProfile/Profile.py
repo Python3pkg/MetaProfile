@@ -56,14 +56,14 @@ class Profile(object):
     def normalize_to_library(self):
         """Normalize profile to the library size
         """
-        self.profile_normalized_to_library = asarray(map(lambda i: i/float(self.signal.library_size), self.profile_raw))
+        self.profile_normalized_to_library = asarray([i/float(self.signal.library_size) for i in self.profile_raw])
 
     def normalize_to_gene(self):
         """Normalize profile to the library size and to the gene count i.e.
         normalize each window to the total count in it by dividing each
         entry by the sum of the counts.
         """
-        adjusted_profile = asarray(map(lambda i: i/float(i.sum()), self.profile_raw))
+        adjusted_profile = asarray([i/float(i.sum()) for i in self.profile_raw])
         self.profile_normalized_to_gene = nan_to_num(adjusted_profile)
 
     def get_profile_by_type(self, profile_type):

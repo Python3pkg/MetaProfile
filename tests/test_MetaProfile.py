@@ -43,15 +43,15 @@ windows_list = ({'name': "PolyA-signal",
                  'filepath': "test_windows_small.bed",
                  'pseudocount': 0},)
 
-print "########################################################################################################"
+print("########################################################################################################")
 start_time = time.time()
 start_date = time.strftime("%d-%m-%Y at %H:%M:%S")
 sys.stderr.write("############## Started script on %s ##############\n" % start_date)
 
 pc = get_profiler(signal_list, windows_list)
 fig, ax = pl.subplots()
-for profile_name, profile in pc.profiles.iteritems():
-    print profile_name, profile.get_aggregated_profile("raw", metric='mean').sum()
+for profile_name, profile in pc.profiles.items():
+    print(profile_name, profile.get_aggregated_profile("raw", metric='mean').sum())
     profile.plot_line("normalized_to_gene", ax=ax, aggregate=True, label=profile_name, metric='sum')
     # ax.plot(profile.get_aggregated_profile("raw", metric='mean')/profile.get_aggregated_profile("raw", metric='mean').sum(),
     #        label=profile_name)
@@ -63,4 +63,4 @@ pl.savefig("plot.pdf")
 # pl.savefig("heatmap.pdf")
 
 sys.stderr.write("### Successfully finished in %i seconds, on %s ###\n" % (time.time() - start_time, time.strftime("%d-%m-%Y at %H:%M:%S")))
-print "########################################################################################################"
+print("########################################################################################################")

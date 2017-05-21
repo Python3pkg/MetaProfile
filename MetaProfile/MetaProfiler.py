@@ -79,7 +79,7 @@ class MetaProfiler():
         """
         if update and delete:
             raise Exception("You can chose one of two: delete or update, not both.")
-        elif (len(self.profiles.keys()) != 0 and delete):
+        elif (len(list(self.profiles.keys())) != 0 and delete):
             self.profiles = {}
             sys.stderr.write("Dictionary with profiles will be deleted and constructed form the scratch!\n")
             if not self.signals:
@@ -100,7 +100,7 @@ class MetaProfiler():
                         self.profiles[profile_name] = prof
                     else:
                         raise Exception("Profile %s already in dictionary! You may have duplicated something." % profile_name)
-        elif (len(self.profiles.keys()) != 0 and update):
+        elif (len(list(self.profiles.keys())) != 0 and update):
             sys.stderr.write("Dictionary with profiles will be updated!\n")
             if not self.signals:
                 raise NoSignalsException("No signals detected. Add some genomic signals before using this function.\n")
@@ -120,10 +120,10 @@ class MetaProfiler():
                         self.profiles[profile_name] = prof
                     else:
                         sys.stderr.write("Profile %s already in dictionary! Skipping.\n" % profile_name)
-        elif (len(self.profiles.keys()) != 0 and not update) or (len(self.profiles.keys()) != 0 and not delete):
+        elif (len(list(self.profiles.keys())) != 0 and not update) or (len(list(self.profiles.keys())) != 0 and not delete):
             sys.stderr.write("Dictionary with profiles is not empty. Use update=True to force updating the profile or delete=True to construct it from scratch!\n")
         else:
-            assert len(self.profiles.keys()) == 0
+            assert len(list(self.profiles.keys())) == 0
             if not self.signals:
                 raise NoSignalsException("No signals detected. Add some genomic signals before using this function.\n")
             if not self.signals:
@@ -177,9 +177,9 @@ class MetaProfiler():
 
     def show_profiles(self):
         """List all profiles available"""
-        if len(self.profiles.keys()) == 0:
+        if len(list(self.profiles.keys())) == 0:
             sys.stderr.write("No profiles yet.\n")
-        for i, profile in enumerate(self.profiles.values()):
+        for i, profile in enumerate(list(self.profiles.values())):
             sys.stderr.write("%i. '%s'\n" % (i + 1, profile.name))
 
     def __construct_profile_name(self, s, w):
